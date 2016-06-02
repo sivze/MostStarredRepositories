@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="grid_columns">2</integer>
+    <integer name="progress_view_offset_start">100</integer>
+    <integer name="progress_view_offset_end">400</integer>
+</resources>

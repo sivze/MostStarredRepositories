@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/grid_item_height">
+
+    <ImageView
+        android:id="@+id/grid_item_avatar_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/grid_item_info_container"
+        android:background="@color/colorPrimaryTransparent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/grid_item_padding"
+            android:paddingRight="@dimen/grid_item_padding">
+
+            <ImageView
+                android:id="@+id/grid_item_sort_type_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/grid_item_sort_type_image_height"
+                android:layout_centerVertical="true"
+                tools:src="@drawable/ic_star" />
+
+            <TextView
+                android:id="@+id/grid_item_sort_type_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/grid_item_large_text_size" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/grid_item_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/grid_item_padding"
+            android:paddingRight="@dimen/grid_item_padding"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/grid_item_large_text_size"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:singleLine="false"
+            android:ellipsize="end"
+            android:maxHeight="100dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:padding="@dimen/grid_item_padding"
+            android:paddingLeft="@dimen/grid_item_padding"
+            android:paddingRight="@dimen/grid_item_padding"
+            android:paddingBottom="@dimen/grid_item_padding">
+
+            <TextView
+                android:id="@+id/grid_item_user_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/grid_item_padding"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/grid_item_text_size"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/grid_item_created_date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/grid_item_padding"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/grid_item_text_size"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>
