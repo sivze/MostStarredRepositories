@@ -16,7 +16,7 @@ public class ContributorsModel implements Parcelable{
     @SerializedName("avatar_url")
     public String avatarUrl;
 
-    @SerializedName("url")
+    @SerializedName("html_url")
     public String profileUrl;
 
     @Override
