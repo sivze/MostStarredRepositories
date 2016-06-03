@@ -84,7 +84,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemHolder> 
             holder.mSortTypeValueTextView.setText(String.valueOf(itemData.forks));
         }
 
-        String imageUrl = itemData.owner.avatar_url;
+        String imageUrl = itemData.owner.avatarUrl;
         final FrameLayout container = holder.mInfoContainer;
 
         Picasso.with(holder.mAvatarImageView.getContext()).load(imageUrl).

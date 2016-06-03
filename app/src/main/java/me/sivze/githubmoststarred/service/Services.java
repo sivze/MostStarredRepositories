@@ -12,7 +12,8 @@ public class Services {
 
     static {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.GITHUB_API_BASE_URL).addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(Constants.GITHUB_API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         gitHubService = retrofit.create(GitHubService.class);
     }

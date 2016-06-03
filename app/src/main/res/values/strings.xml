@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">GitHub Repos</string>
+    <string name="repo_contributors">Repo Contributors</string>
     <string name="search_query_hint">search repositories</string>
     <string name="sort_by_most_forked">Most Forked</string>
     <string name="sort_by_most_starred">Most Starred</string>
+    <string name="contributors">Contributors - click to open profile</string>
+    <string name="no_contributors">No Contributors</string>
 
     <string name="created_at">Created: %1$s</string>
     <string name="owner">Owner: %1$s</string>

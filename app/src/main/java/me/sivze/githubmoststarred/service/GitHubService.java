@@ -1,8 +1,10 @@
 package me.sivze.githubmoststarred.service;
 
+import me.sivze.githubmoststarred.model.ContributorsModel;
 import me.sivze.githubmoststarred.model.ReposResponseModel;
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -15,7 +17,9 @@ public interface GitHubService {
             @Query("sort") String sortBy,
             @Query("order") String orderBy);
 
-//    @GET("/repos")
-//    Call<ContributorsModel> getContributors(@Path("id") long , @Query("") String Key);
+    @GET("/repos/{login}/{name}/contributors")
+    Call<ContributorsModel[]> getContributors(
+            @Path("login") String contributorLogin,
+            @Path("name") String repoName);
 
 }

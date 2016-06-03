@@ -1,5 +1,6 @@
 package me.sivze.githubmoststarred.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +13,7 @@ import me.sivze.githubmoststarred.util.Constants;
 
 public class MainActivity
         extends AppCompatActivity
-        implements ReposFragment.Callback{
+        implements ReposFragment.Callback {
 
     private static final String TAG = "MainActivity";
     private int selectedPosition = RecyclerView.NO_POSITION;
@@ -31,13 +32,18 @@ public class MainActivity
 
     /**
      * This overriden method used as listener when user select a item in the grid.
+     *
      * @param reposData selected repo
-     * @param position selected position in the grid
+     * @param position  selected position in the grid
      */
     @Override
     public void onItemSelected(ReposModel reposData, int position) {
         Log.d(TAG, "onItemSelected() called");
         selectedPosition = position;
+
+        Intent openDetailIntent = new Intent(this, ContributorsActivity.class);
+        openDetailIntent.putExtra(Constants.REPO_CONTRIBUTORS_KEY, reposData);
+        startActivity(openDetailIntent);
     }
 
     public int getSelectedPosition() {
