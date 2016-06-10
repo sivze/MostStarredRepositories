@@ -9,6 +9,7 @@ import retrofit.http.Query;
 
 /**
  * Created by Siva on 6/1/2016.
+ * Retrofit turns your HTTP API into a java interface
  */
 public interface GitHubService {
     @GET("/search/repositories")

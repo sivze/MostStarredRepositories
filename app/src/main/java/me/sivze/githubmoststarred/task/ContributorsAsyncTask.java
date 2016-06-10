@@ -17,7 +17,7 @@ import retrofit.Response;
  */
 public class ContributorsAsyncTask extends BaseAsyncTask<ContributorsModel> {
 
-    private static final String TAG = "ContributorsAsyncTask";
+    private static final String TAG = ContributorsAsyncTask.class.getSimpleName();
 
     private String mContributorName;
     private String mRepoName;

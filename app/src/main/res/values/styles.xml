@@ -14,7 +14,6 @@
         <item name="android:layout_marginTop">@dimen/grid_item_padding</item>
         <item name="android:layout_marginLeft">@dimen/grid_item_padding</item>
         <item name="android:layout_marginRight">@dimen/grid_item_padding</item>
-        <item name="android:orientation">horizontal</item>
     </style>
 
 </resources>

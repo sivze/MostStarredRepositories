@@ -3,7 +3,6 @@ package me.sivze.githubmoststarred.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import me.sivze.githubmoststarred.R;
@@ -15,19 +14,12 @@ public class MainActivity
         extends AppCompatActivity
         implements ReposFragment.Callback {
 
-    private static final String TAG = "MainActivity";
-    private int selectedPosition = RecyclerView.NO_POSITION;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(Constants.SELECTED_ITEM_POSITION_KEY, selectedPosition);
     }
 
     /**
@@ -39,14 +31,9 @@ public class MainActivity
     @Override
     public void onItemSelected(ReposModel reposData, int position) {
         Log.d(TAG, "onItemSelected() called");
-        selectedPosition = position;
 
         Intent openDetailIntent = new Intent(this, ContributorsActivity.class);
-        openDetailIntent.putExtra(Constants.REPO_CONTRIBUTORS_KEY, reposData);
+        openDetailIntent.putExtra(Constants.REPO_KEY, reposData);
         startActivity(openDetailIntent);
-    }
-
-    public int getSelectedPosition() {
-        return selectedPosition;
     }
 }

@@ -11,11 +11,16 @@ import java.util.List;
 public abstract class BaseTaskLoader<T> extends AsyncTaskLoader<List<T>> {
 
     private List<T> mResults;
-    
-    public BaseTaskLoader(Context context){
+
+    public BaseTaskLoader(Context context) {
         super(context);
     }
 
+    /**
+     * Called when there is new data to deliver to the client.  The
+     * super class will take care of delivering it; the implementation
+     * here just adds a little more logic.
+     */
     @Override
     public void deliverResult(List<T> items) {
         mResults = items;
@@ -24,19 +29,24 @@ public abstract class BaseTaskLoader<T> extends AsyncTaskLoader<List<T>> {
         }
     }
 
+    /**
+     * Handles the request to start the loader
+     */
     @Override
     protected void onStartLoading() {
+        //if we currently have results available, deliver it immediately
         if (mResults != null) {
             deliverResult(mResults);
         }
-
+        //If content changed since last time it was loaded or if it is not currently available
         if (takeContentChanged() || mResults == null) {
-            forceLoad();
+            forceLoad(); //force an asynchronous load ignoring the previous loaded data set and loads new data set
         }
     }
 
     @Override
     protected void onStopLoading() {
+        //attempt to cancel the load task if possible
         cancelLoad();
     }
 
@@ -44,5 +54,9 @@ public abstract class BaseTaskLoader<T> extends AsyncTaskLoader<List<T>> {
     protected void onReset() {
         super.onReset();
         onStopLoading();
+        //at this point we can release the resources if needed
+        if(mResults!=null){
+            mResults = null;
+        }
     }
 }

@@ -52,7 +52,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemHolder> 
 
     @Override
     public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater
+                .from(parent.getContext())
                 .inflate(R.layout.item_template_repos_grid, parent, false);
         return new ItemHolder(v);
     }
@@ -77,25 +78,29 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemHolder> 
         holder.mCreatedDateTextView.setText(mContext.getString(R.string.created_at, itemData.getFormattedDate()));
 
         if (Constants.SORT_BY_STARS.equals(sortType)) {
-            setIconForType(holder);
+            setIconForType(holder, sortType);
             holder.mSortTypeValueTextView.setText(String.valueOf(itemData.stars));
         } else {
-            setIconForType(holder);
+            setIconForType(holder, sortType);
             holder.mSortTypeValueTextView.setText(String.valueOf(itemData.forks));
         }
 
         String imageUrl = itemData.owner.avatarUrl;
         final FrameLayout container = holder.mInfoContainer;
 
-        Picasso.with(holder.mAvatarImageView.getContext()).load(imageUrl).
-                into(holder.mAvatarImageView, new Callback() {
+        Picasso.with(holder.mAvatarImageView.getContext())
+                .load(imageUrl)
+                .into(holder.mAvatarImageView, new Callback() {
                     @Override
                     public void onSuccess() {
                         Bitmap posterBitmap = ((BitmapDrawable) holder.mAvatarImageView.getDrawable()).getBitmap();
-                        Palette.from(posterBitmap).generate(new Palette.PaletteAsyncListener() {
+                        Palette.from(posterBitmap)
+                                .generate(new Palette.PaletteAsyncListener() {
                             @Override
                             public void onGenerated(Palette palette) {
-                                container.setBackgroundColor(ColorUtils.setAlphaComponent(palette.getMutedColor(mDefaultColor), 190)); //Opacity
+                                container.setBackgroundColor(
+                                        ColorUtils.setAlphaComponent(
+                                                palette.getMutedColor(mDefaultColor), 190)); //Opacity
                             }
                         });
                     }
@@ -106,10 +111,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemHolder> 
                 });
     }
 
-    private void setIconForType(ItemHolder holder) {
-        if (Settings.getPrefs(holder.mSortTypeIconImageView.getContext(),
-                Constants.SORT_MODE,
-                Constants.SORT_BY_STARS).equals(Constants.SORT_BY_STARS)) {
+    private void setIconForType(ItemHolder holder, String sortType) {
+        if (sortType.equals(Constants.SORT_BY_STARS)) {
             holder.mSortTypeIconImageView.setImageResource(R.drawable.ic_star);
         } else {
             holder.mSortTypeIconImageView.setImageResource(R.drawable.ic_fork);

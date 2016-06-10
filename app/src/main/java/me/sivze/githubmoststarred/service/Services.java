@@ -15,6 +15,7 @@ public class Services {
                 .baseUrl(Constants.GITHUB_API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        //The Retrofit class generates an implementation of the GitHubService interface.
         gitHubService = retrofit.create(GitHubService.class);
     }
 

@@ -50,14 +50,14 @@ public class ContributorsFragment extends Fragment{
     @Override
     public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(Constants.CONTRIBUTORS_KEY, mContributors);
+        outState.putParcelableArrayList(Constants.CONTRIBUTORS_LIST_KEY, mContributors);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mReposData = getArguments().getParcelable(Constants.REPO_CONTRIBUTORS_KEY);
+            mReposData = getArguments().getParcelable(Constants.REPO_KEY);
         }
     }
 
@@ -72,7 +72,7 @@ public class ContributorsFragment extends Fragment{
         ButterKnife.bind(this, view);
 
         if (savedInstanceState != null) {
-            mContributors = savedInstanceState.getParcelableArrayList(Constants.CONTRIBUTORS_KEY);
+            mContributors = savedInstanceState.getParcelableArrayList(Constants.CONTRIBUTORS_LIST_KEY);
             addContributorViews(mContributors);
         } else {
             executeTasks(mReposData);
@@ -118,17 +118,17 @@ public class ContributorsFragment extends Fragment{
                         mContributorsLinearLayout,
                         false);
 
-                final ImageView contributorAvatar = ButterKnife.findById(contributorView, R.id.contributor_avatar_image_view);
-                final TextView contributorName = ButterKnife.findById(contributorView, R.id.contributor_name_text_view);
-
-                contributorName.setText(contributor.name);
-
                 contributorView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         openUrlIntent(contributor.profileUrl);
                     }
                 });
+
+                final ImageView contributorAvatar = ButterKnife.findById(contributorView, R.id.contributor_avatar_image_view);
+                final TextView contributorName = ButterKnife.findById(contributorView, R.id.contributor_name_text_view);
+
+                contributorName.setText(contributor.name);
 
                 Picasso.with(getActivity())
                         .load(contributor.avatarUrl)

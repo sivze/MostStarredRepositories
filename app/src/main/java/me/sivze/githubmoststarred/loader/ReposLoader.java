@@ -22,12 +22,17 @@ import retrofit.Response;
  */
 public class ReposLoader extends BaseTaskLoader{
 
-    private static final String TAG = "ReposLoader";
+    private static final String TAG = ReposLoader.class.getSimpleName();
 
     public ReposLoader(Context context) {
         super(context);
     }
 
+    /**
+     * This is where the bulk of our work is done.  This function is
+     * called in a background thread and should generate a new set of
+     * data to be published by the loader.
+     */
     @Override
     public List<ReposModel> loadInBackground() {
 

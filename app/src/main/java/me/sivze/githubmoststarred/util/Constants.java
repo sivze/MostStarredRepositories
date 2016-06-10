@@ -14,7 +14,6 @@ public class Constants {
     public static final String SORT_BY_FORKS = "forks";
     public static final String ORDER_BY = "desc";
 
-    public static final String SELECTED_ITEM_POSITION_KEY = "selected_item_position";
-    public static final String CONTRIBUTORS_KEY = "contributors_key";
-    public final static String REPO_CONTRIBUTORS_KEY = "repo_contributors";
+    public static final String CONTRIBUTORS_LIST_KEY = "contributors_list_key";
+    public final static String REPO_KEY = "repo_key";
 }

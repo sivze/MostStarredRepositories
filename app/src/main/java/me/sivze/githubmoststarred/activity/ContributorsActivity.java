@@ -22,8 +22,12 @@ public class ContributorsActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
             Bundle bundle = new Bundle(getIntent().getExtras());
-            fragmentTransaction.add(R.id.contributors_container, ContributorsFragment.newInstance(bundle)).commit();
+
+            fragmentTransaction
+                    .add(R.id.contributors_container, ContributorsFragment.newInstance(bundle))
+                    .commit();
         }
     }
 }

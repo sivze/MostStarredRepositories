@@ -23,7 +23,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.sivze.githubmoststarred.R;
-import me.sivze.githubmoststarred.activity.MainActivity;
 import me.sivze.githubmoststarred.adapter.ItemsAdapter;
 import me.sivze.githubmoststarred.loader.ReposLoader;
 import me.sivze.githubmoststarred.model.ReposModel;
@@ -39,6 +38,8 @@ public class ReposFragment
         implements LoaderManager.LoaderCallbacks<List<ReposModel>>,
         SwipeRefreshLayout.OnRefreshListener{
 
+    public static final String LOG_TAG = ReposFragment.class.getSimpleName();
+
     @Bind(R.id.fragement_repos_swipe_refresh_layout)
     SwipeRefreshLayout mReposSwipeRefreshLayout;
 
@@ -47,13 +48,6 @@ public class ReposFragment
 
     private ArrayList<ReposModel> mReposList;
     private ItemsAdapter mReposAdapter;
-    private MainActivity mMainActivity;
-
-    public static final String LOG_TAG = ReposFragment.class.getSimpleName();
-
-    public static Fragment newInstance() {
-        return new ReposFragment();
-    }
 
     public interface Callback {
         void onItemSelected(ReposModel reposItem, int position);
@@ -62,7 +56,6 @@ public class ReposFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mMainActivity = (MainActivity) context;
     }
 
     @Override
@@ -91,13 +84,13 @@ public class ReposFragment
         final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), gridColumns);
 
         mReposRecyclerView.setLayoutManager(mLayoutManager);
-        mReposRecyclerView.setHasFixedSize(true);
 
         //for spacing between items "1dp"
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.grid_item_spacing);
         mReposRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
 
         int colorPrimaryLight = ContextCompat.getColor(getActivity(), (R.color.colorPrimaryTransparent));
+
         mReposAdapter = new ItemsAdapter(
                 mReposList,
                 colorPrimaryLight,
@@ -106,7 +99,8 @@ public class ReposFragment
 
         mReposRecyclerView.setAdapter(mReposAdapter);
 
-        //set listener for onRefreshListener, otherwise it will be loading indeterminately
+        //set listener for onRefreshListener that register the swipe refresh event to be triggered,
+        // otherwise it will be loading indeterminately
         mReposSwipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
@@ -164,19 +158,18 @@ public class ReposFragment
     @Override
     public void onLoadFinished(Loader<List<ReposModel>> loader, List<ReposModel> data) {
         mReposSwipeRefreshLayout.setRefreshing(false);
-        mReposList = (ArrayList<ReposModel>) data;
         mReposAdapter.addItems(data);
 
-        if (mMainActivity != null && mMainActivity.getSelectedPosition() != -1) {
-            mReposRecyclerView.scrollToPosition(mMainActivity.getSelectedPosition());
-        }
-
-        Snackbar.make(getView(), data == null || data.isEmpty() ? R.string.load_failed : R.string.load_success,
-                Snackbar.LENGTH_LONG).show();
+        Snackbar.make(
+                getView(),
+                data == null || data.isEmpty() ? R.string.load_failed : R.string.load_success,
+                Snackbar.LENGTH_LONG)
+                .show();
     }
 
     @Override
     public void onLoaderReset(Loader<List<ReposModel>> loader) {
+        //clear the data in the adapter
         mReposSwipeRefreshLayout.setRefreshing(false);
         mReposAdapter.addItems(null);
     }
