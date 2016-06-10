@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemHolder> 
 
         holder.mNameTextView.setText(itemData.name);
         holder.mUserTextView.setText(mContext.getString(R.string.owner,itemData.owner.login));
-        holder.mCreatedDateTextView.setText(mContext.getString(R.string.created_at, itemData.getFormattedDate()));
+        holder.mCreatedDateTextView.setText(mContext.getString(R.string.created_at,
+                new SimpleDateFormat(Constants.DATE_FORMAT).format(
+                        itemData.getFormattedDate().getTime())));
 
         if (Constants.SORT_BY_STARS.equals(sortType)) {
             setIconForType(holder, sortType);

@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
  * Created by Siva on 6/1/2016.
  */
@@ -23,15 +25,18 @@ public class ReposModel implements Parcelable {
     public String contributorsUrl;
 
     @SerializedName("created_at")
-    public String createdAt;
+    public Date createdAt;
 
     @SerializedName("owner")
     public Owner owner;
 
 
 
-    public String getFormattedDate() {
-        return createdAt.substring(0,10);
+    public Date getFormattedDate() {
+        if (createdAt!=null) {
+            return createdAt;
+        }
+        return null;
     }
 
     @Override
@@ -45,7 +50,7 @@ public class ReposModel implements Parcelable {
         dest.writeInt(this.stars);
         dest.writeInt(this.forks);
         dest.writeString(this.contributorsUrl);
-        dest.writeString(this.createdAt);
+        dest.writeLong(this.createdAt.getTime());
         dest.writeParcelable(this.owner, flags);
     }
 
@@ -58,7 +63,7 @@ public class ReposModel implements Parcelable {
         this.stars = in.readInt();
         this.forks = in.readInt();
         this.contributorsUrl = in.readString();
-        this.createdAt = in.readString();
+        this.createdAt = new Date(in.readLong());
         owner = (Owner) in.readParcelable(Owner.class.getClassLoader());
     }
 
@@ -72,18 +77,18 @@ public class ReposModel implements Parcelable {
         }
     };
 
-    @Override
-    public String toString() {
-        return "ReposData{" +
-                "name='" + name + '\'' +
-                ", stars=" + stars +
-                ", forks=" + forks +
-                ", contributorsUrl='" + contributorsUrl + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", avatarUrl='" + owner.avatarUrl + '\'' +
-                ", login='" + owner.login + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "ReposData{" +
+//                "name='" + name + '\'' +
+//                ", stars=" + stars +
+//                ", forks=" + forks +
+//                ", contributorsUrl='" + contributorsUrl + '\'' +
+//                ", createdAt='" + createdAt + '\'' +
+//                ", avatarUrl='" + owner.avatarUrl + '\'' +
+//                ", login='" + owner.login + '\'' +
+//                '}';
+//    }
 
     public static class Owner implements Parcelable {
         @SerializedName("avatar_url")

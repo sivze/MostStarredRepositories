@@ -184,5 +184,4 @@ public class ReposFragment
         super.onDestroy();
         ButterKnife.unbind(this);
     }
-
 }
