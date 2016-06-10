@@ -7,6 +7,7 @@ public class Constants {
 
     public final static String DATE_FORMAT = "yyyy-MM-dd";
     public static final String CREATED_SYNTAX = "created:>";
+    public static final String POSITION_KEY = "selected_item_position";
 
     public static final String GITHUB_API_BASE_URL = "https://api.github.com/";
     public static final String SORT_MODE = "sort_mode";

@@ -31,6 +31,8 @@ import me.sivze.githubmoststarred.util.Constants;
  */
 public class ContributorsFragment extends Fragment{
 
+    public static final String TAG = ContributorsFragment.class.getSimpleName();
+
     @Bind(R.id.contributors_linear_layout)
     LinearLayout mContributorsLinearLayout;
 
