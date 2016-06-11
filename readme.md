@@ -4,6 +4,9 @@ This app lists hottest repositories for the past week. Repositories can be sorte
 ## Mobile UI
 ![alt tag](https://github.com/sivze/MostStarredRepositories/blob/master/screens/screen1.gif)
 
+## Tablet UI
+![alt tag](https://github.com/sivze/MostStarredRepositories/blob/master/screens/TabletUI.gif)
+
 ## APIs used
 - card view
 - palette
